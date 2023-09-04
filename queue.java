@@ -1,3 +1,14 @@
+class Node {
+    Board data;
+    Node next;
+
+    Node(Board data) {
+        this.data = data;
+    }
+
+}
+
+
 public class queue {
     Node head;
     Node tail;
@@ -35,14 +46,3 @@ public class queue {
         }
     }
 }
-
-class Node {
-    Board data;
-    Node next;
-
-    Node(Board data) {
-        this.data = data;
-    }
-
-}
-

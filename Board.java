@@ -1,5 +1,7 @@
 import java.util.Random;
 
+
+
 //functional handling of an instance of the board. Can be created using an id.
 public class Board {
     private static final int SIZE = 3;
@@ -7,6 +9,7 @@ public class Board {
     private int[][] board;  // Values of board
     private int blankRow;   // Row location of blank
     private int blankCol;   // Column location of blank
+    private String sequence = "";   // List of moves to get to this board
 
 
     /**
@@ -30,6 +33,21 @@ public class Board {
      * @param id
      */
     Board(String id) {
+        board = new int[SIZE][SIZE];
+        int c = 0;
+        for (int i = 0; i < SIZE; i++)
+            for (int j = 0; j < SIZE; j++) {
+                if (id.charAt(c) == '0') {
+                    blankRow = i;
+                    blankCol = j;
+                }
+                //assigns each item of the string to the board as an int.
+                board[i][j] = Integer.parseInt(id.substring(c, ++c));
+            }
+    }
+
+     Board(String id, String moves) {
+        this.sequence = moves;
         board = new int[SIZE][SIZE];
         int c = 0;
         for (int i = 0; i < SIZE; i++)
@@ -217,6 +235,25 @@ public class Board {
             }
         }
         return id;
+    }
+
+    public char getLastMove() {
+        if (this.sequence.length() == 0) {
+            return 'N';
+        }
+        return this.sequence.charAt(this.sequence.length() - 1);
+    }
+
+    public String getSequence() {
+        return this.sequence;
+    }
+
+    public void setSequence(String sequence) {
+        this.sequence = sequence;
+    }
+
+    public void addMove(char move) {
+        this.sequence += move;
     }
 }
 
